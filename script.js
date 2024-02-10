@@ -3,6 +3,10 @@ const ctx = canvas.getContext("2d");
 const blueyColor = "#00a0ce";
 let a = 0;
 const gravity = 0.7;
+function runGame() {
+  animate();
+}
+
 
 
 
