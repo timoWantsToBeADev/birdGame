@@ -1,0 +1,5 @@
+1.      collision
+2.      point scoring + cheese animation
+3a.     setup cheese lifetime
+3b.     deleting cheese object
+4.      recreate cheese object after point score
