@@ -1,13 +1,19 @@
+const scoreEl = document.getElementById("score");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+canvas.width = 1024;
+canvas.height = 576;
+
 const blueyColor = "#00a0ce";
 const gravity = 0.7;
 const maxJump = 3;
 let points = 0;
-const randomX = () => {return Math.floor(Math.random() * 1025) }          
-const randomY = () => {return (Math.floor(Math.random() * 350) + 50) }      
-const randomW = () => {return (Math.floor(Math.random() * 10) + 10) }
-const randomH = () => {return (Math.floor(Math.random() * 10) + 10) }
+
+
+const randomX = () => { return Math.floor(Math.random() * (canvas.width + 1)) }
+const randomY = () => { return (Math.floor(Math.random() * 350) + 50) }
+const randomW = () => { return (Math.floor(Math.random() * 10) + 10) }
+const randomH = () => { return (Math.floor(Math.random() * 10) + 10) }
 
 function runGame() {
   animate();
@@ -15,8 +21,6 @@ function runGame() {
 
 
 // drawing the canvas
-canvas.width = 1024;
-canvas.height = 576;
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -41,11 +45,11 @@ class Sprite {
       this.jumpcount = 0;
     }
 
-    if(this.position.x < 0){
+    if (this.position.x < 0) {
       this.position.x = 0;
-    } else if(this.position.x + this.width > 1024){
+    } else if (this.position.x + this.width > 1024) {
       this.position.x = 1024 - this.width;
-    } else if(this.position.y < 0) {
+    } else if (this.position.y < 0) {
       this.position.y = 0;
     }
 
@@ -68,7 +72,7 @@ class Sprite {
 
 
 class Cheese {
-  constructor({ position, duration,width,height }) {
+  constructor({ position, duration, width, height }) {
     this.position = position
     this.height = height
     this.width = width
@@ -98,10 +102,9 @@ const bluey = new Sprite({
 
 
 
-
 let kaas = new Cheese({
   position: { x: randomX(), y: randomY() },
-  width: 10, 
+  width: 10,
   height: 10,
   duration: 5
 })
@@ -129,14 +132,13 @@ window.addEventListener("keydown", (event) => {
 ///separate jump eventlistener
 window.addEventListener("keydown", (event) => {
   if (event.key === "w" && bluey.jumpcount < maxJump && !bluey.jump) {
-    console.log(bluey.jumpcount)
     bluey.jump = true;
     bluey.jumpcount++;
     setTimeout(() => {
       bluey.jump = false;
     }, 100);
-    
-    
+
+
   }
 
 });
@@ -145,7 +147,7 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("keyup", (event) => {
   if (liveKeys.includes(event.key) && (event.key === "a" || event.key === "d")) {
     liveKeys = liveKeys.filter((key) => key != event.key)
-    
+
   }
 
   if (event.key === "w") {
@@ -154,20 +156,28 @@ window.addEventListener("keyup", (event) => {
 });
 
 
-function checkCol(){
-    if(bluey.position.x + bluey.width >= kaas.position.x && bluey.position.x <= kaas.position.x + kaas.width &&
-       bluey.position.y <= kaas.position.y + kaas.height && bluey.position.y + bluey.height >= kaas.position.y){
-        
-        kaas = new Cheese({
-          position: { x: randomX(), y: randomY() },
-          width: randomW(), 
-          height: randomH(),
-          duration: 5
-        })
-        bluey.width++;
-        bluey.height++;
-        points++
-        console.log("🧀Yummmmmmy🧀")
+function checkCol() {
+  if (bluey.position.x + bluey.width >= kaas.position.x && bluey.position.x <= kaas.position.x + kaas.width &&
+    bluey.position.y <= kaas.position.y + kaas.height && bluey.position.y + bluey.height >= kaas.position.y) {
 
-    }
+    kaas = new Cheese({
+      position: { x: randomX(), y: randomY() },
+      width: randomW(),
+      height: randomH(),
+      duration: 5
+    })
+    bluey.width++;
+    bluey.height++;
+    points++
+    scoreEl.textContent = points;
+    console.log("Yummmmmmy")
+
+  }
 }
+
+
+
+
+
+
+
