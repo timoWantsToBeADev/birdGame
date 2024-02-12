@@ -1,4 +1,7 @@
 const scoreEl = document.getElementById("score");
+const caloriesEl = document.getElementById("calories");
+const scorelineEl = document.getElementById("scoreline");
+const startbtnEl = document.getElementById("start-btn");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 1024;
@@ -8,6 +11,7 @@ const blueyColor = "#00a0ce";
 const gravity = 0.7;
 const maxJump = 3;
 let points = 0;
+let calories = 0;
 
 
 const randomX = () => { return Math.floor(Math.random() * (canvas.width + 1)) }
@@ -17,6 +21,7 @@ const randomH = () => { return (Math.floor(Math.random() * 10) + 10) }
 
 function runGame() {
   animate();
+  startbtnEl.hidden = true;
 }
 
 
@@ -166,10 +171,17 @@ function checkCol() {
       height: randomH(),
       duration: 5
     })
-    bluey.width++;
-    bluey.height++;
+    bluey.width += 0.2;
+    bluey.height += 0.2;
     points++
+    calories += (kaas.height * kaas.width) / 2
+    if(scorelineEl.hidden) {
+      scorelineEl.hidden = false
+    }
+
+
     scoreEl.textContent = points;
+    caloriesEl.textContent = calories;
     console.log("Yummmmmmy")
 
   }

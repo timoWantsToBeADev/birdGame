@@ -1,0 +1,27 @@
+/* * {
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+    margin: 0;
+} */
+
+body {
+    display: block;
+}
+
+#gameDiv {
+    position: relative;
+    display: inline-block;
+}
+
+#UIcontainer {
+    position: absolute;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
+#start-btn {
+    margin-top: 50px;
+}
+

@@ -5,12 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <canvas id="canvas"></canvas>
-    <p id="scoreline">Totalscore: <span id="score"></span></p>
-    <button onclick="runGame()">click</button>
+   
+    <div id="gameDiv">
+        <div id="UIcontainer">
+        <p id="scoreline" hidden>Totalscore: <span id="score"></span> (<span id="calories"></span> Calories)</p>
+        <button id="start-btn" onclick="runGame()">start game</button>
+        </div>
+        <canvas id="canvas"></canvas>
+        
+    </div>    
+    
+
+
+
+
+   
+    
     <script src="movementv2.js"></script>
 </body>
 
