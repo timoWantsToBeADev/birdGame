@@ -35,7 +35,53 @@ ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 
 
-class Sprite {
+// class Sprite {
+//   constructor({ position, velocity, height, width }) {
+//     this.position = position;
+//     this.velocity = velocity;
+//     this.height = height;
+//     this.width = width;
+//     this.jump = false;
+//     this.jumpcount = 0;
+//   }
+
+//   draw() {
+//     ctx.fillStyle = blueyColor;
+//     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+//   }
+//   update() {
+//     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+//       this.velocity.y = 0;
+//       this.jumpcount = 0;
+//     }
+
+//     if (this.position.x < 0) {
+//       this.position.x = 0;
+//     } else if (this.position.x + this.width > 1024) {
+//       this.position.x = 1024 - this.width;
+//     } else if (this.position.y < 0) {
+//       this.position.y = 0;
+//     }
+
+//     bluey.velocity.x = 0;
+
+//     if (liveKeys[0] === "a") { this.velocity.x = -3 }
+//     else if (liveKeys[0] === "d") { this.velocity.x = 3 }
+
+//     if (this.jump === true && this.jumpcount < maxJump && bluey.position.y > 30) {
+//       this.velocity.y = -12;
+//       //////////<---- jump timer in update!
+
+//     }
+
+//     this.draw();
+//     this.position.y += this.velocity.y;
+//     this.position.x += this.velocity.x;
+//   }
+// }
+
+
+class Charachter {
   constructor({ position, velocity, height, width }) {
     this.position = position;
     this.velocity = velocity;
@@ -43,11 +89,23 @@ class Sprite {
     this.width = width;
     this.jump = false;
     this.jumpcount = 0;
+
+    this.image = new Image(this.width, this.height)
+    this.image.src = "./img/bird.png";
+
   }
 
   draw() {
-    ctx.fillStyle = blueyColor;
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    // ctx.fillStyle = blueyColor;
+    // ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+    ctx.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
   }
   update() {
     if (this.position.y + this.height + this.velocity.y >= canvas.height) {
@@ -63,14 +121,20 @@ class Sprite {
       this.position.y = 0;
     }
 
-    bluey.velocity.x = 0;
+    this.velocity.x = 0;
 
-    if (liveKeys[0] === "a") { this.velocity.x = -3 }
-    else if (liveKeys[0] === "d") { this.velocity.x = 3 }
+    if (liveKeys[0] === "a") {
+      this.velocity.x = -3;
+      this.image.src = "./img/birdLeft.png"
+    }
+    else if (liveKeys[0] === "d") {
+      this.velocity.x = 3;
+      this.image.src = "./img/bird.png"
+    }
 
-    if (this.jump === true && this.jumpcount < maxJump && bluey.position.y > 30) {
+    if (this.jump === true && this.jumpcount < maxJump && this.position.y > 30) {
       this.velocity.y = -12;
-      //////////<---- jump timer in update!
+
 
     }
 
@@ -81,23 +145,33 @@ class Sprite {
 }
 
 
+
+
 class Cheese {
   constructor({ position, duration, width, height }) {
     this.position = position
     this.height = height
     this.width = width
     this.duration = duration
+    this.image = new Image(this.width, this.height)
+    this.image.src = "./img/kaas.png"
   }
 
   draw() {
-    ctx.fillStyle = "yellow";
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    ctx.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      30,
+      30
+    )
+
   }
 
 
 }
 
-const bluey = new Sprite({
+const bluey = new Charachter({
   position: {
     x: 50,
     y: 50,
@@ -181,7 +255,7 @@ function checkCol() {
     bluey.height += 0.2;
     points++
     calories += (kaas.height * kaas.width) / 2
-    if(scorelineEl.hidden) {
+    if (scorelineEl.hidden) {
       scorelineEl.hidden = false
     }
 
@@ -194,16 +268,16 @@ function checkCol() {
 }
 
 
-function drawBG(){
-    bg = new Image(canvas.width,canvas.height)
-    bg.src = "./img/background.png";
-    ctx.drawImage(
-      bg,
-      0,
-      0,
-      bg.width,
-      bg.height
-    )
+function drawBG() {
+  bg = new Image(canvas.width, canvas.height)
+  bg.src = "./img/background.png";
+  ctx.drawImage(
+    bg,
+    0,
+    0,
+    bg.width,
+    bg.height
+  )
 }
 
 
