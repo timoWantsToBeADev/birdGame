@@ -4,6 +4,7 @@ const scorelineEl = document.getElementById("scoreline");
 const startbtnEl = document.getElementById("start-btn");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
+const audio = document.getElementById("audio-tag");
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -244,7 +245,7 @@ window.addEventListener("keyup", (event) => {
 function checkCol() {
   if (bluey.position.x + bluey.width >= kaas.position.x && bluey.position.x <= kaas.position.x + kaas.width &&
     bluey.position.y <= kaas.position.y + kaas.height && bluey.position.y + bluey.height >= kaas.position.y) {
-
+    audio.play();
     kaas = new Cheese({
       position: { x: randomX(), y: randomY() },
       width: randomW(),
