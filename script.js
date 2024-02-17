@@ -10,7 +10,7 @@ const soundtrackAudio = document.getElementById("soundtrack-audio");
 soundtrackAudio.volume = 0.5;
 canvas.width = 1024;
 canvas.height = 576;
-let fps = 60;
+let fps = 120;
 
 const blueyColor = "#00a0ce";
 const gravity = 0.7;
@@ -204,15 +204,15 @@ let kaas = new Cheese({
 
 function animate() {
   setTimeout(() => {
-    
+
     window.requestAnimationFrame(animate);
     drawBG();
     bluey.velocity.y += gravity;
     bluey.update();
     kaas.draw();
     checkCol();
-    
-  }, 1000/fps);
+
+  }, 1000 / fps);
 }
 
 let liveKeys = []; //liveKeys[0] is leading direction
