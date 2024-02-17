@@ -10,6 +10,7 @@ const soundtrackAudio = document.getElementById("soundtrack-audio");
 soundtrackAudio.volume = 0.5;
 canvas.width = 1024;
 canvas.height = 576;
+let fps = 60;
 
 const blueyColor = "#00a0ce";
 const gravity = 0.7;
@@ -28,6 +29,8 @@ const randomH = () => { return (Math.floor(Math.random() * 10) + 10) }
 
 function runGame() {
   btnAudio.play();
+  soundtrackAudio.loop = true;
+  soundtrackAudio.volume = 0.25;
   soundtrackAudio.play();
   animate();
   startbtnEl.hidden = true;
@@ -200,14 +203,16 @@ let kaas = new Cheese({
 })
 
 function animate() {
-  window.requestAnimationFrame(animate);
-  // ctx.fillStyle = "black";
-  // ctx.fillRect(0, 0, canvas.width, canvas.height);
-  drawBG();
-  bluey.velocity.y += gravity;
-  bluey.update();
-  kaas.draw();
-  checkCol();
+  setTimeout(() => {
+    
+    window.requestAnimationFrame(animate);
+    drawBG();
+    bluey.velocity.y += gravity;
+    bluey.update();
+    kaas.draw();
+    checkCol();
+    
+  }, 1000/fps);
 }
 
 let liveKeys = []; //liveKeys[0] is leading direction
