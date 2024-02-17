@@ -4,7 +4,10 @@ const scorelineEl = document.getElementById("scoreline");
 const startbtnEl = document.getElementById("start-btn");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const audio = document.getElementById("audio-tag");
+const eatAudio = document.getElementById("eat-audio");
+const btnAudio = document.getElementById("btn-audio");
+const soundtrackAudio = document.getElementById("soundtrack-audio");
+soundtrackAudio.volume = 0.5;
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -24,6 +27,8 @@ const randomH = () => { return (Math.floor(Math.random() * 10) + 10) }
 
 
 function runGame() {
+  btnAudio.play();
+  soundtrackAudio.play();
   animate();
   startbtnEl.hidden = true;
 }
@@ -245,7 +250,7 @@ window.addEventListener("keyup", (event) => {
 function checkCol() {
   if (bluey.position.x + bluey.width >= kaas.position.x && bluey.position.x <= kaas.position.x + kaas.width &&
     bluey.position.y <= kaas.position.y + kaas.height && bluey.position.y + bluey.height >= kaas.position.y) {
-    audio.play();
+    eatAudio.play();
     kaas = new Cheese({
       position: { x: randomX(), y: randomY() },
       width: randomW(),
@@ -280,9 +285,5 @@ function drawBG() {
     bg.height
   )
 }
-
-
-
-
 
 
