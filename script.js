@@ -36,6 +36,8 @@ const randomH = () => {
   return Math.floor(Math.random() * 10) + 10;
 };
 
+let playerName = window.prompt("Enter your name");
+
 function runGame() {
   btnAudio.play();
   soundtrackAudio.loop = true;
@@ -307,5 +309,17 @@ function countDown() {
 
 function gameOVer(points) {
   window.alert(`Game over, your score was ${points}`);
-  location.reload();
+
+  let score = {
+    name: playerName,
+    score: points,
+    combo: 0,
+  }
+
+  postScore(score)
+
+  setTimeout(() => {
+    location.reload();
+  }, 5000);
+
 }
