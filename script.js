@@ -120,8 +120,17 @@ class Charachter {
     this.jumpcount = 0;
     this.image = new Image(this.width, this.height);
     this.image.src = "./img/bird.png";
+    this.glideMultiplier = 0; 
+    // this.gliding = false;
   }
 
+  glide(velocityY){
+    if(velocityY > 0) {
+      console.log(`Added speed: ${(velocityY / 5)}`)
+    return 1 + (velocityY / 10)
+  } else {return 1}
+  }
+    
   draw() {
     // ctx.fillStyle = blueyColor;
     // ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -148,7 +157,7 @@ class Charachter {
       this.position.y = 0;
     }
 
-    this.velocity.x = 0;
+      this.velocity.x = 0;
 
     if (liveKeys[0] === "a") {
       this.velocity.x = -3;
@@ -168,8 +177,9 @@ class Charachter {
 
     this.draw();
     this.position.y += this.velocity.y;
-    this.position.x += this.velocity.x;
-  }
+    this.position.x += (this.velocity.x * this.glide(this.velocity.y)); 
+    }
+
 }
 
 class Cheese {
@@ -260,6 +270,21 @@ window.addEventListener("keyup", (event) => {
     bluey.jump = false;
   }
 });
+
+
+// window.addEventListener("keydown", (event) => {
+//   if(event.code === "ShiftLeft"){
+//     bluey.gliding = true;  
+//   }
+// });
+
+// window.addEventListener("keyup", (event) => {
+//   if(event.code === "ShiftLeft"){
+//     bluey.gliding = false;    
+//   }
+// });
+
+
 
 function checkCol() {
   if (
