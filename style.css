@@ -30,3 +30,13 @@ p {
     text-shadow: 1px 1px 3px hsla(0, 0%, 0%, 0.822);
     font-size: 2rem;
 }
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#highScoresContainer{
+    margin-left: 25px;
+}
+

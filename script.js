@@ -1,3 +1,4 @@
+getScores();
 const scoreEl = document.getElementById("score");
 const livesEl = document.getElementById("lives");
 const scorelineEl = document.getElementById("scoreline");
@@ -7,6 +8,8 @@ const ctx = canvas.getContext("2d");
 const eatAudio = document.getElementById("eat-audio");
 const btnAudio = document.getElementById("btn-audio");
 const soundtrackAudio = document.getElementById("soundtrack-audio");
+
+
 soundtrackAudio.volume = 0.5;
 canvas.width = 1024;
 canvas.height = 576;
@@ -37,6 +40,9 @@ const randomH = () => {
 };
 
 let playerName = window.prompt("Enter your name");
+console.log(highScores);
+highScoresContainerEl.hidden = false
+
 
 function runGame() {
   btnAudio.play();
